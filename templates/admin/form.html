@@ -1,0 +1,157 @@
+{% extends 'layout/main.html' %}
+{% block content %}
+    <div id="page-wrapper">
+        <div class="row">
+            <br>
+            <div class="text-center">
+                {% if form.instance.id %}
+                    <h4>Editar Registro</h4>
+                {% else %}
+                    <h4>Nuevo Registro</h4>
+                {% endif %}
+            </div>
+            <br>
+            <form class="formUnividoc" method="post">
+                {% csrf_token %}
+                {{ form.errors }}
+                <div class="col-md-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Datos Personales
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    {{ form.first_name.errors }}
+                                    {{ form.first_name.label_tag }}
+                                    {{ form.first_name }}
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    {{ form.last_name.errors }}
+                                    {{ form.last_name.label_tag }}
+                                    {{ form.last_name }}
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    {{ form.ine.errors }}
+                                    {{ form.ine.label_tag }}
+                                    {{ form.ine }}
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="form-group">
+                                    {{ form.street.errors }}
+                                    {{ form.street.label_tag }}
+                                    {{ form.street }}
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    {{ form.street_number.errors }}
+                                    {{ form.street_number.label_tag }}
+                                    {{ form.street_number }}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    {{ form.street_between.errors }}
+                                    {{ form.street_between.label_tag }}
+                                    {{ form.street_between }}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    {{ form.street_and_between.errors }}
+                                    {{ form.street_and_between.label_tag }}
+                                    {{ form.street_and_between }}
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    {{ form.suburb.errors }}
+                                    {{ form.suburb.label_tag }}
+                                    {{ form.suburb }}
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    {{ form.locality.errors }}
+                                    {{ form.locality.label_tag }}
+                                    {{ form.locality }}
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    {{ form.city.errors }}
+                                    {{ form.city.label_tag }}
+                                    {{ form.city }}
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    {{ form.state.errors }}
+                                    {{ form.state.label_tag }}
+                                    {{ form.state }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">Información Adicional</div>
+                        <div class="panel-body">
+                            <div class="col-md-12">
+                                <label class="labelForm">
+                                    {{ form.user_type.label }}
+                                </label>
+                                {% for key, value in form.user_type.field.choices %}
+                                    {% if key %}
+                                        <div class="form-group">
+                                            <label class="control control-checkbox">
+                                                <input type="radio" id="{{ value }}" value="{{ key }}"
+                                                       {% if key == form.instance.user_type %}checked{% endif %}
+                                                       name="user_type" required>
+                                                {{ value }}
+                                                <div class="control_indicator"></div>
+                                            </label>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                                <hr>
+                                {% for key, value in form.agent_type.field.choices %}
+                                    <div class="form-group">
+                                        <label class="control control-checkbox">
+                                            <input type="checkbox" id="{{ value }}" value="{{ key }}"
+                                                   class="allergy_checkbox" name="agent_type"
+                                                   {% if key in form.instance.agent_type %}checked{% endif %}>
+                                            {{ value }}
+                                            <div class="control_indicator"></div>
+                                        </label>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <br>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary btn-lg">
+                        Guardar
+                    </button>
+                    <div onclick="history.back()" class="btn btn-default btn-lg">
+                        Cancelar
+                    </div>
+                    <br>
+                    <br>
+                    <br>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}
